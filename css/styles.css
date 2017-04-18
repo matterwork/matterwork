@@ -1,0 +1,67 @@
+@import "compass/css3";
+
+input {
+  width: 4em;
+}
+
+
+.wrapper {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+    
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+  
+  font-family: Rubik;
+  text-align: center;
+  font-size: 100%;
+}
+
+.wrapper > * {
+  padding: 10px;
+  flex: 1 100%;
+}
+
+.header {
+  font-size: 150%;
+}
+
+.footer {
+  font-size: 75%;
+}
+
+.disclaimer {
+  font-size: 80%;
+}
+
+.unitrt {  
+  text-align: right;
+}
+.unitlt {  
+  text-align: left;
+}
+
+@media all and (min-width: 600px) {
+  .aside { flex: 1 auto;  font-size: 90%; }
+}
+
+@media all and (min-width: 800px) {
+  .credit     { flex: 3 0px; }
+  .disclaimer { order: 1; } 
+  .unit       { order: 2; }
+  .unitrt       { order: 2; }
+  .unitlt       { order: 2; }
+  .footer     { order: 4; }
+}
+
+body {
+  padding: 2em; 
+}
+
+.center {
+    margin-left:auto; 
+    margin-right:auto;
+}

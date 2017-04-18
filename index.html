@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Rubik">
+
+<link rel="stylesheet" href="styles.css">
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: { 
+    tooltipc: ["\\tooltip{\\color{green}{#1}}{#2}",2],
+    texttip: ["\\tooltip{#1}{\\text{#2}}",2],
+    texttipc: ["\\tooltip{\\color{green}{#1}}{\\text{#2}}",2]
+    }
+  },
+  tex2jax: {
+    inlineMath: [['$','$'],['\\(','\\)']],
+    preview: ["[math]"],
+    processEscapes: true
+  }
+}); 
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  var TEX = MathJax.InputJax.TeX,
+      MML = MathJax.ElementJax.mml;
+  TEX.Definitions.macros.tooltip = "myToolTip";
+  TEX.Parse.Augment({
+    myToolTip: function (name) {
+    var arg = this.ParseArg(name), tip = this.ParseArg(name);
+    this.Push(MML.maction(arg,tip).With({actiontype: MML.ACTIONTYPE.TOOLTIP}));
+    }
+  });
+});  
+</script>
+
+
+</head>
+<body>
+<div class="wrapper">
+  <header class="header">Vancomycin Dosing Reference</header>
+  <article class="disclaimer">Matt W, PharmD<p>This tool does not replace clinical judgement or hospital policies. Please use responsibly.
+Based on one compartment decay principles, other sources cited within the document</p></article>
+</div>
+<div class="wrapper">
+  <article class="unit">Population Kinetics</article>
+  <aside class="aside unit">Inputs
+      <aside class="aside unit"><table class="center">
+	<tr><td>Age</td><td><input type="number" id="age" oninput="PK()"></td><td>years</td></tr>
+	<tr><td>Sex</td><td><form><select onchange="PK()" id="sex"><option value="50">Male</option><option value="45.5">Female</option></select></form></td></tr>
+	<tr><td>Height</td><td><input type="number" id="ht" oninput="PK()"></td><td>cm</td></tr>
+	<tr><td>Weight</td><td><input type="number" id="wt" oninput="PK()"></td><td>kg</td></tr>
+	<tr><td>SCr</td><td><input type="number" id="scr" oninput="PK()"></td><td>mg/dL</td></tr>
+	<tr><td>Adjust SCr</td><td><form><select onchange="PK()" id="sex"><option value="50">Yes</option><option value="45.5">No</option></select></form></td></tr>
+	<tr><td>Max CrCl</td><td><input type="number" id="maxcrcl" oninput="PK()"></td><td>mL/min</td></tr>
+	<tr><td>Equation</td><td><form><select onchange="PK()" id="sex"><option value="50">Matzke</option><option value="45.5">Female</option></select></form></td></tr></table></aside>  
+  </aside>
+  <aside class="aside unit">Equations
+  <div class="wrapper">
+      <aside class="aside unit">$$CrCl (mL/min) = {(140 - \texttipc{Age}{Age}) * \texttipc{Weight}{Weight} \over 72 * \texttipc{SCr}{Creatinine} } * \texttipc{Ratio}{Muscle Ratio} = \texttipc{CrCl}{CrCl}$$</aside>
+      <aside class="aside unit">$$ \frac{\texttipc{a+b}{numerator}}{\texttipc{2}{denominator}} $$</aside>
+  </div>
+  <div class="wrapper">
+      <aside class="aside unit">$$CrCl = {(140 - Age) * Weight \over 72 * SCr } * Muscle Ratio $$</aside>
+      <aside class="aside unit">$$CrCl = {(140 - Age) * Weight \over 72 * SCr } * Muscle Ratio $$</aside>
+  </div>
+  </aside>
+</div>
+<div class="wrapper">
+  <footer class="footer"><p>&copy; <script>new Date().getFullYear()>2010&&document.write(+new Date().getFullYear());</script>, Clinical Reference</p></footer>
+</div>
+
+<script>
+function PK() {
+var Age = parseInt(document.getElementById("age").value);
+document.getElementById("age").innerHTML = Math.round(Age*10)/10;
+}
+window.onload = PK();
+</script>
+
+
+</body>
+</html>
